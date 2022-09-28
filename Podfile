@@ -7,4 +7,12 @@ target 'MessageApp' do
 
   # Pods for MessageApp
 
+
+pod 'FirebaseCore'
+
+pod 'FirebaseAuth'
+
+pod 'FirebaseDatabase'
+
+
 end
