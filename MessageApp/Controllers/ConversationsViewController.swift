@@ -8,15 +8,24 @@
 import UIKit
 
 class ConversationsViewController: UIViewController {
-
-    @IBOutlet weak var lbText: UILabel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        lbText.text = "Hello World"
+        view.backgroundColor = .green
     }
-
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "logged_in")
+        if !isLoggedIn {
+            print("navigate to Loggin page")
+            let vc = LoginViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        }
+    }
 }
 
