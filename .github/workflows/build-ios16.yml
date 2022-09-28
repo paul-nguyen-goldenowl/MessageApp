@@ -28,5 +28,4 @@ jobs:
 
     - name: Xcode iOS build
       run: |
-        cd Xcode/
-        xcodebuild clean build -scheme MessageApp -destination 'platform=iOS Simulator,name=iPhone 12,OS=16.0'
+        xcodebuild clean build -scheme MessageApp -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.0'
