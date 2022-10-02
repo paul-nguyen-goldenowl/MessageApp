@@ -19,7 +19,14 @@ jobs:
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-pods-
-
+          
+    - uses: actions/cache@v2
+      name: "Cache: Swift Package Manager"
+      with:
+        path: ~/Library/Developer/Xcode/DerivedData/MessageApp-*/SourcePackages/
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Podfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_14.0.app
 
