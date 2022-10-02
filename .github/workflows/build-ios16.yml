@@ -28,7 +28,7 @@ jobs:
           ~/Library/Developer/Xcode/DerivedData/MessageApp-*/SourcePackages
         key: ${{ runner.os }}-derivedData-cache-${{ hashFiles('**/Podfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-derivedData-cache
+          ${{ runner.os }}-derivedData-cache-
 
     - name: Avoid inode changes for DerivedData
       run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
