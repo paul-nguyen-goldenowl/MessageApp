@@ -20,6 +20,20 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pods-
 
+    - uses: actions/cache@v2
+      name: "Cache Derived Data"
+      with:
+        path: |
+          ~/Library/Developer/Xcode/DerivedData/MessageApp-*/Build
+          ~/Library/Developer/Xcode/DerivedData/MessageApp-*/SourcePackages
+        key: ${{ runner.os }}-derivedData-cache-${{ hashFiles('**/Podfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-derivedData-cache-
+
+    - name: Avoid inode changes for DerivedData
+      run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
+
+
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_14.0.app
 
@@ -33,3 +47,7 @@ jobs:
     - name: Xcode iOS build
       run: |
         xcodebuild -workspace MessageApp.xcworkspace -scheme MessageApp -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.0'
+
+    - name: cache size
+      run: |
+        du -sh  ~/Library/Developer/Xcode/DerivedData/MessageApp-*
