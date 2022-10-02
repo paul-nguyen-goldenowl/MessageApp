@@ -28,10 +28,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-spm-
 
-    - name: cache size
-      run: |
-        du -sh  ~/Library/Developer/Xcode/DerivedData/MessageApp-*
-
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_14.0.app
 
@@ -45,3 +41,7 @@ jobs:
     - name: Xcode iOS build
       run: |
         xcodebuild -workspace MessageApp.xcworkspace -scheme MessageApp -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.0'
+
+    - name: cache size
+          run: |
+            du -sh  ~/Library/Developer/Xcode/DerivedData/MessageApp-*
