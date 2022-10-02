@@ -43,5 +43,5 @@ jobs:
         xcodebuild -workspace MessageApp.xcworkspace -scheme MessageApp -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.0'
 
     - name: cache size
-          run: |
-            du -sh  ~/Library/Developer/Xcode/DerivedData/MessageApp-*
+      run: |
+        du -sh  ~/Library/Developer/Xcode/DerivedData/MessageApp-*
