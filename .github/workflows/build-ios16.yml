@@ -19,14 +19,6 @@ jobs:
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-pods-
-          
-    # - uses: actions/cache@v2
-    #   name: "Cache: Swift Package Manager"
-    #   with:
-    #     path: ~/Library/Developer/Xcode/DerivedData/MessageApp-*/SourcePackages/
-    #     key: ${{ runner.os }}-spm-${{ hashFiles('**/Podfile.lock') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-spm-
 
     - uses: actions/cache@v2
       name: "Cache Derived Data"
@@ -37,7 +29,7 @@ jobs:
         key: ${{ runner.os }}-derivedData-cache-${{ hashFiles('**/Podfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-derivedData-cache
-          
+
     - name: Avoid inode changes for DerivedData
       run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
 
