@@ -20,13 +20,27 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pods-
           
+    # - uses: actions/cache@v2
+    #   name: "Cache: Swift Package Manager"
+    #   with:
+    #     path: ~/Library/Developer/Xcode/DerivedData/MessageApp-*/SourcePackages/
+    #     key: ${{ runner.os }}-spm-${{ hashFiles('**/Podfile.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-spm-
+
     - uses: actions/cache@v2
-      name: "Cache: Swift Package Manager"
+      name: "Cache Derived Data"
       with:
-        path: ~/Library/Developer/Xcode/DerivedData/MessageApp-*/SourcePackages/
-        key: ${{ runner.os }}-spm-${{ hashFiles('**/Podfile.lock') }}
+        path: |
+          ~/Library/Developer/Xcode/DerivedData/MessageApp-*/Build
+          ~/Library/Developer/Xcode/DerivedData/MessageApp-*/SourcePackages
+        key: ${{ runner.os }}-derivedData-cache-${{ hashFiles('**/Podfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-spm-
+          ${{ runner.os }}-derivedData-cache
+          
+    - name: Avoid inode changes for DerivedData
+      run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
+
 
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_14.0.app
